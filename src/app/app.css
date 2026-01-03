@@ -1,79 +1,391 @@
-/* 🎨 Lesson 1: Component Styling Example */
+/* 🎨 Lesson 2: Data Binding Styles */
 
 .container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 30px;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h1 {
+.main-title {
   color: #dd0031;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.welcome-card {
+/* Section Styles */
+.section {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #dd0031;
+}
+
+/* Card Container */
+.card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  color: #667eea;
+  font-size: 1.3rem;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.card h3:first-child {
+  margin-top: 0;
+}
+
+.card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 8px 0;
+}
+
+/* Property Binding - Demo Box */
+.demo-box {
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.demo-box.active {
+  background: #28a745;
+  color: white;
+  border-color: #28a745;
+  font-weight: bold;
+}
+
+/* Buttons */
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin: 5px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.toggle-btn:hover {
+  background: #5a6268;
+}
+
+.action-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-}
-
-.welcome-card h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.welcome-card p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
-.info-section {
-  background: #f8f9fa;
-  padding: 25px;
-  border-left: 5px solid #28a745;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
-
-.info-section h3 {
-  color: #28a745;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-.info-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.info-section li {
-  padding: 10px 0;
   font-size: 1.1rem;
-  color: #495057;
 }
 
-.next-lesson {
+.action-btn:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Color Buttons */
+.color-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.color-btn {
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.color-btn.red { background: #dc3545; }
+.color-btn.red:hover { background: #c82333; }
+
+.color-btn.green { background: #28a745; }
+.color-btn.green:hover { background: #218838; }
+
+.color-btn.blue { background: #007bff; }
+.color-btn.blue:hover { background: #0056b3; }
+
+.color-btn.orange { background: #fd7e14; }
+.color-btn.orange:hover { background: #e8590c; }
+
+/* Input Fields */
+.input-field {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 10px 0;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Message Display */
+.message {
   background: #fff3cd;
-  border: 2px solid #ffc107;
+  border-left: 4px solid #ffc107;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  color: #856404;
+  margin: 15px 0;
+}
+
+/* Hover Box */
+.hover-box {
+  padding: 40px;
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 15px 0;
+}
+
+.hover-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(132, 250, 176, 0.4);
+}
+
+/* Form Styles */
+.form-group {
+  margin: 15px 0;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.submit-btn {
+  background: #28a745;
+  color: white;
+  flex: 1;
+}
+
+.submit-btn:hover {
+  background: #218838;
+}
+
+.clear-btn {
+  background: #dc3545;
+  color: white;
+  flex: 1;
+}
+
+.clear-btn:hover {
+  background: #c82333;
+}
+
+/* Preview Box */
+.preview-box {
+  background: #f8f9fa;
+  border: 2px dashed #6c757d;
   padding: 20px;
   border-radius: 8px;
+  margin-top: 20px;
+}
+
+.preview-box h4 {
+  color: #667eea;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.preview-box p {
+  margin: 8px 0;
+  color: #333;
+}
+
+/* Counter Section */
+.counter-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 30px;
+  border-radius: 15px;
+  color: white;
+}
+
+.counter-section h2 {
+  color: white;
+  border-bottom-color: white;
+}
+
+.counter-card {
+  background: rgba(255, 255, 255, 0.95);
   text-align: center;
+}
+
+.counter-display {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #667eea;
+  margin: 30px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.counter-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.counter-btn {
+  font-size: 1.1rem;
+  padding: 15px 30px;
+  min-width: 150px;
+}
+
+.counter-btn.increment {
+  background: #28a745;
+  color: white;
+}
+
+.counter-btn.increment:hover {
+  background: #218838;
+}
+
+.counter-btn.decrement {
+  background: #dc3545;
+  color: white;
+}
+
+.counter-btn.decrement:hover {
+  background: #c82333;
+}
+
+.counter-btn.reset {
+  background: #ffc107;
+  color: #333;
+}
+
+.counter-btn.reset:hover {
+  background: #e0a800;
+}
+
+/* Next Lesson Box */
+.next-lesson {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 40px;
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
 }
 
 .next-lesson p {
-  margin: 0;
+  margin: 10px 0;
   font-size: 1.2rem;
-  color: #856404;
+  color: white;
 }
 
 .next-lesson strong {
-  color: #d39e00;
+  font-size: 1.4rem;
+}
+
+/* Section Colors */
+.interpolation-section .card {
+  border-left: 5px solid #17a2b8;
+}
+
+.property-binding-section .card {
+  border-left: 5px solid #28a745;
+}
+
+.event-binding-section .card {
+  border-left: 5px solid #ffc107;
+}
+
+.two-way-binding-section .card {
+  border-left: 5px solid #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .counter-display {
+    font-size: 3.5rem;
+  }
+  
+  .counter-controls {
+    flex-direction: column;
+  }
+  
+  .counter-btn {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .color-buttons {
+    flex-direction: column;
+  }
+  
+  .color-btn {
+    width: 100%;
+  }
 }

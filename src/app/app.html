@@ -1,27 +1,181 @@
-<!-- 🎯 Lesson 1: Pehla Angular Component Example -->
+<!-- 📚 Lesson 2: Data Binding - All Examples -->
 
 <div class="container">
-  <!-- ✨ Interpolation: {{ }} se TypeScript ka data dikhate hain -->
-  <h1>{{ title() }}</h1>
+  <h1 class="main-title">📚 Lesson 2: Data Binding</h1>
   
-  <div class="welcome-card">
-    <h2>✨ Welcome to Angular Learning! ✨</h2>
-    <p>Yeh aapka pehla Angular component hai!</p>
-  </div>
-  
-  <div class="info-section">
-    <h3>📚 Lesson 1: File Structure</h3>
-    <ul>
-      <li>✅ Angular project successfully run ho raha hai</li>
-      <li>✅ Component 3 files se bana hai: .ts, .html, .css</li>
-      <li>✅ {{ "{{" }} {{ "}}" }} - Interpolation se data dikha rahe hain</li>
-    </ul>
-  </div>
+  <!-- ============================================ -->
+  <!-- 1️⃣ INTERPOLATION Section -->
+  <!-- ============================================ -->
+  <section class="section interpolation-section">
+    <h2>1️⃣ Interpolation {{ "{" }}{{ "}" }}</h2>
+    <div class="card">
+      <h3>Simple Variables:</h3>
+      <p><strong>Name:</strong> {{ name }}</p>
+      <p><strong>Age:</strong> {{ age }}</p>
+      <p><strong>Location:</strong> {{ city }}, {{ country }}</p>
+      
+      <h3>Method Call:</h3>
+      <p>{{ getFullInfo() }}</p>
+      
+      <h3>Expression & Calculation:</h3>
+      <p><strong>Price:</strong> ₹{{ price }}</p>
+      <p><strong>Quantity:</strong> {{ quantity }}</p>
+      <p><strong>Total:</strong> ₹{{ price * quantity }}</p>
+    </div>
+  </section>
 
+  <!-- ============================================ -->
+  <!-- 2️⃣ PROPERTY BINDING Section -->
+  <!-- ============================================ -->
+  <section class="section property-binding-section">
+    <h2>2️⃣ Property Binding [property]</h2>
+    
+    <div class="card">
+      <h3>Image Source Binding:</h3>
+      <img [src]="imageUrl" [alt]="imageAlt" width="150">
+      
+      <h3>Disabled Property:</h3>
+      <button [disabled]="isButtonDisabled">
+        {{ isButtonDisabled ? 'Disabled Button' : 'Enabled Button' }}
+      </button>
+      <button (click)="isButtonDisabled = !isButtonDisabled" class="toggle-btn">
+        Toggle Disabled
+      </button>
+      
+      <h3>Class Binding:</h3>
+      <div [class.active]="isActive" class="demo-box">
+        Active Status: {{ isActive }}
+      </div>
+      <button (click)="isActive = !isActive" class="toggle-btn">
+        Toggle Active Class
+      </button>
+      
+      <h3>Style Binding:</h3>
+      <p [style.color]="textColor" [style.font-size]="fontSize" [style.font-weight]="'bold'">
+        This text has dynamic styles!
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 3️⃣ EVENT BINDING Section -->
+  <!-- ============================================ -->
+  <section class="section event-binding-section">
+    <h2>3️⃣ Event Binding (event)</h2>
+    
+    <div class="card">
+      <h3>Click Event:</h3>
+      <p class="message">{{ clickMessage }}</p>
+      <button (click)="onButtonClick()" class="action-btn">
+        Click Me! 🖱️
+      </button>
+      
+      <h3>Input Event:</h3>
+      <input 
+        type="text" 
+        (input)="onInputChange($event)" 
+        placeholder="Type something..."
+        class="input-field">
+      <p>You typed: <strong>{{ userInput }}</strong></p>
+      
+      <h3>Mouse Events:</h3>
+      <p class="message">{{ mouseStatus }}</p>
+      <div 
+        (mouseenter)="onMouseEnter()" 
+        (mouseleave)="onMouseLeave()"
+        class="hover-box">
+        Hover over me!
+      </div>
+      
+      <h3>Event with Parameters:</h3>
+      <div class="color-buttons">
+        <button (click)="selectColor('Red')" class="color-btn red">Red</button>
+        <button (click)="selectColor('Green')" class="color-btn green">Green</button>
+        <button (click)="selectColor('Blue')" class="color-btn blue">Blue</button>
+        <button (click)="selectColor('Orange')" class="color-btn orange">Orange</button>
+      </div>
+      <p>Selected Color: <strong [style.color]="textColor">{{ selectedColor }}</strong></p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4️⃣ TWO-WAY BINDING Section -->
+  <!-- ============================================ -->
+  <section class="section two-way-binding-section">
+    <h2>4️⃣ Two-Way Binding [(ngModel)]</h2>
+    
+    <div class="card">
+      <h3>Simple Example:</h3>
+      <input 
+        [(ngModel)]="username" 
+        placeholder="Enter your name"
+        class="input-field">
+      <p>Hello, <strong>{{ username || 'Guest' }}</strong>! 👋</p>
+      
+      <h3>Contact Form:</h3>
+      <div class="form-group">
+        <label>Full Name:</label>
+        <input [(ngModel)]="user.fullName" placeholder="John Doe" class="input-field">
+      </div>
+      
+      <div class="form-group">
+        <label>Email:</label>
+        <input [(ngModel)]="user.emailAddress" type="email" placeholder="john@example.com" class="input-field">
+      </div>
+      
+      <div class="form-group">
+        <label>Age:</label>
+        <input [(ngModel)]="user.age" type="number" placeholder="25" class="input-field">
+      </div>
+      
+      <div class="form-group">
+        <label>City:</label>
+        <input [(ngModel)]="user.city" placeholder="New York" class="input-field">
+      </div>
+      
+      <div class="form-actions">
+        <button (click)="submitForm()" class="submit-btn">Submit 📝</button>
+        <button (click)="clearForm()" class="clear-btn">Clear ❌</button>
+      </div>
+      
+      <div class="preview-box">
+        <h4>Live Preview:</h4>
+        <p><strong>Name:</strong> {{ user.fullName || '-' }}</p>
+        <p><strong>Email:</strong> {{ user.emailAddress || '-' }}</p>
+        <p><strong>Age:</strong> {{ user.age || '-' }}</p>
+        <p><strong>City:</strong> {{ user.city || '-' }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 🎯 COUNTER Practice Section -->
+  <!-- ============================================ -->
+  <section class="section counter-section">
+    <h2>🎯 Practice: Counter Example</h2>
+    
+    <div class="card counter-card">
+      <h3>Interactive Counter</h3>
+      <div class="counter-display">{{ counter }}</div>
+      
+      <div class="counter-controls">
+        <button (click)="decrement()" class="counter-btn decrement">➖ Decrease</button>
+        <button (click)="reset()" class="counter-btn reset">🔄 Reset</button>
+        <button (click)="increment()" class="counter-btn increment">➕ Increase</button>
+      </div>
+      
+      <div class="form-group">
+        <label>Set Value Manually:</label>
+        <input [(ngModel)]="counter" type="number" class="input-field">
+      </div>
+    </div>
+  </section>
+
+  <!-- Next Lesson Info -->
   <div class="next-lesson">
-    <p><strong>Next:</strong> Lesson 2 mein seekhenge Interpolation & Data Binding! 🚀</p>
+    <p><strong>✅ Lesson 2 Complete!</strong></p>
+    <p>Next: Lesson 3 - Directives (*ngIf, *ngFor) 🚀</p>
   </div>
 </div>
 
 <router-outlet />
-
