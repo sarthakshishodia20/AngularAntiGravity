@@ -1,0 +1,68 @@
+/* Counter Styles */
+
+.counter-widget {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+}
+
+.counter-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.counter-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.counter-btn.increment {
+  background: #28a745;
+  color: white;
+}
+
+.counter-btn.decrement {
+  background: #dc3545;
+  color: white;
+}
+
+.counter-btn.reset {
+  background: #ffc107;
+  color: #333;
+}
+
+.counter-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.counter-display .value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.counter-display .range {
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 5px;
+}

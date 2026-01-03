@@ -1,0 +1,13 @@
+<!-- Rating Template -->
+<div class="rating-widget"  (mouseleave)="onMouseLeave()">
+  <span 
+    *ngFor="let star of stars"
+    class="star"
+    [ngClass]="getStarClass(star)"
+    (click)="onStarClick(star)"
+    (mouseenter)="onStarHover(star)"
+    [class.readonly]="readonly">
+    ⭐
+  </span>
+  <span class="rating-text">{{ rating }}/{{ maxRating }}</span>
+</div>

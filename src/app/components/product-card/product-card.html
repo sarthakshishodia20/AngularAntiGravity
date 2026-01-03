@@ -1,0 +1,30 @@
+<!-- Product Card Template -->
+<div class="product-card">
+  <div class="product-image">
+    <img [src]="product.image" [alt]="product.name">
+    <span class="stock-badge" [ngClass]="stockClass">
+      {{ stockStatus }}
+    </span>
+  </div>
+  
+  <div class="product-info">
+    <h3>{{ product.name }}</h3>
+    <p class="category">{{ product.category }}</p>
+    <p class="price">₹{{ product.price.toLocaleString() }}</p>
+    <p class="stock-info">Stock: {{ product.stock }} units</p>
+  </div>
+  
+  <div class="product-actions">
+    <button 
+      (click)="onBuy()" 
+      [disabled]="product.stock === 0"
+      class="buy-btn">
+      {{ product.stock > 0 ? 'Buy Now' : 'Out of Stock' }}
+    </button>
+    <button 
+      (click)="onAddToWishlist()" 
+      class="wishlist-btn">
+      ❤️ Wishlist
+    </button>
+  </div>
+</div>
