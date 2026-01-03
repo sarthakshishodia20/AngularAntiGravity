@@ -1,356 +1,181 @@
-<!-- 📚 Lesson 3: Directives - All Examples -->
+<!-- 📚 Lesson 4: Components & Communication -->
 
 <div class="container">
-  <h1 class="main-title">📚 Lesson 3: Directives</h1>
+  <h1 class="main-title">📚 Lesson 4: Components Communication</h1>
   
   <!-- ============================================ -->
-  <!-- 1️⃣ *ngIf Section -->
+  <!-- 1️⃣ @Input Example - Product Cards -->
   <!-- ============================================ -->
-  <section class="section ngif-section">
-    <h2>1️⃣ *ngIf - Conditional Rendering</h2>
+  <section class="section">
+    <h2>1️⃣ @Input - Parent to Child Data Flow</h2>
+    <p class="section-desc">
+      Parent component se child component mein data pass kar rahe hain using <code>@Input()</code>
+    </p>
     
-    <div class="card">
-      <h3>Basic *ngIf</h3>
-      <button (click)="toggleLogin()" class="toggle-btn">
-        {{ isLoggedIn ? 'Logout' : 'Login' }}
-      </button>
-      
-      <div *ngIf="isLoggedIn" class="status-box success">
-        ✅ Welcome back! You are logged in.
-      </div>
-      
-      <div *ngIf="!isLoggedIn" class="status-box warning">
-        ⚠️ Please login to continue.
-      </div>
+    <div class="product-grid">
+      <!-- ⭐ Child component use kar rahe hain -->
+      <app-product-card
+        *ngFor="let product of products"
+        [product]="product"
+        (buyClicked)="handleBuy($event)"
+        (addToWishlist)="handleAddToWishlist($event)">
+      </app-product-card>
     </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 2️⃣ @Output Example - Cart & Wishlist -->
+  <!-- ============================================ -->
+  <section class="section">
+    <h2>2️⃣ @Output - Child to Parent Events</h2>
     
-    <div class="card">
-      <h3>*ngIf with else</h3>
-      <button (click)="toggleData()" class="toggle-btn">Toggle Data</button>
-      
-      <div *ngIf="hasData; else noData" class="status-box success">
-        📊 Data is available!
+    <div class="output-demo">
+      <!-- Cart -->
+      <div class="cart-section">
+        <h3>🛒 Shopping Cart</h3>
+        <div class="cart-items" *ngIf="cart.length > 0; else emptyCart">
+          <div class="cart-item" *ngFor="let item of cart; let i = index">
+            <span class="item-number">{{ i + 1 }}</span>
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-price">₹{{ item.price.toLocaleString() }}</span>
+          </div>
+          <div class="cart-total">
+            <strong>Total:</strong> ₹{{ cartTotal.toLocaleString() }}
+          </div>
+          <button (click)="clearCart()" class="clear-btn">Clear Cart</button>
+        </div>
+        <ng-template #emptyCart>
+          <p class="empty-message">Cart is empty 🛍️</p>
+        </ng-template>
       </div>
       
-      <ng-template #noData>
-        <div class="status-box error">
-          ❌ No data found
+      <!-- Wishlist -->
+      <div class="wishlist-section">
+        <h3>❤️ Wishlist</h3>
+        <div class="wishlist-items" *ngIf="wishlist.length > 0; else emptyWishlist">
+          <div class="wishlist-item" *ngFor="let item of wishlist">
+            <span>{{ item.name }}</span>
+            <button (click)="removeFromWishlist(item.id)" class="remove-btn">✖</button>
+          </div>
         </div>
-      </ng-template>
-    </div>
-    
-    <div class="card">
-      <h3>*ngIf with then/else</h3>
-      <button (click)="toggleLoading()" class="toggle-btn">Toggle Loading</button>
-      
-      <div *ngIf="isLoading; then loading; else content"></div>
-      
-      <ng-template #loading>
-        <div class="status-box info">
-          ⏳ Loading...
-        </div>
-      </ng-template>
-      
-      <ng-template #content>
-        <div class="status-box success">
-          ✨ Content loaded successfully!
-        </div>
-      </ng-template>
-    </div>
-    
-    <div class="card">
-      <h3>Multiple Conditions</h3>
-      <p>Age: {{ age }}, Student: {{ isStudent ? 'Yes' : 'No' }}</p>
-      
-      <div *ngIf="age >= 18 && isStudent" class="status-box success">
-        🎓 Student discount available!
-      </div>
-      
-      <div *ngIf="age < 18" class="status-box info">
-        👶 You are a minor
+        <ng-template #emptyWishlist>
+          <p class="empty-message">No items in wishlist 💔</p>
+        </ng-template>
       </div>
     </div>
   </section>
 
   <!-- ============================================ -->
-  <!-- 2️⃣ *ngFor Section -->
+  <!-- 3️⃣ Two-Way Binding with Custom Component -->
   <!-- ============================================ -->
-  <section class="section ngfor-section">
-    <h2>2️⃣ *ngFor - Loop Elements</h2>
+  <section class="section">
+    <h2>3️⃣ Two-Way Binding with Components</h2>
+    <p class="section-desc">
+      <code>[(value)]</code> pattern use karke two-way binding implement kar rahe hain
+    </p>
     
-    <div class="card">
-      <h3>Simple Array</h3>
-      <ul class="fruit-list">
-        <li *ngFor="let fruit of fruits">{{ fruit }}</li>
-      </ul>
-    </div>
-    
-    <div class="card">
-      <h3>With Index</h3>
-      <ul class="indexed-list">
-        <li *ngFor="let color of colors; let i = index">
-          #{{ i + 1 }} - {{ color }}
-        </li>
-      </ul>
-    </div>
-    
-    <div class="card">
-      <h3>Array of Objects - Users</h3>
-      <div class="user-grid">
-        <div *ngFor="let user of users; trackBy: trackByUserId" 
-             class="user-card"
-             [ngClass]="{ 'inactive': !user.active }">
-          <h4>{{ user.name }}</h4>
-          <p class="role">{{ user.role }}</p>
-          <span class="status" [class.active]="user.active">
-            {{ user.active ? '🟢 Active' : '🔴 Inactive' }}
-          </span>
-        </div>
+    <div class="counter-examples">
+      <div class="counter-demo">
+        <h3>Counter 1 (Range: 0-20)</h3>
+        <!-- ⭐ Two-way binding: [(value)] -->
+        <app-counter 
+          [(value)]="counterValue1" 
+          [min]="0" 
+          [max]="20"
+          [step]="1">
+        </app-counter>
+        <p class="counter-value">Current Value: <strong>{{ counterValue1 }}</strong></p>
+      </div>
+      
+      <div class="counter-demo">
+        <h3>Counter 2 (Range: 0-100, Step: 5)</h3>
+        <app-counter 
+          [(value)]="counterValue2" 
+          [min]="0" 
+          [max]="100"
+          [step]="5">
+        </app-counter>
+        <p class="counter-value">Current Value: <strong>{{ counterValue2 }}</strong></p>
+      </div>
+      
+      <div class="counter-demo">
+        <h3>Counter 3 (Range: -50 to 50)</h3>
+        <app-counter 
+          [(value)]="counterValue3" 
+          [min]="-50" 
+          [max]="50"
+          [step]="10">
+        </app-counter>
+        <p class="counter-value">Current Value: <strong>{{ counterValue3 }}</strong></p>
       </div>
     </div>
     
-    <div class="card">
-      <h3>Products with Stock Status</h3>
-      <div class="product-grid">
-        <div *ngFor="let product of products; trackBy: trackByProductId" 
-             class="product-card">
-          <h4>{{ product.name }}</h4>
-          <p class="price">₹{{ product.price.toLocaleString() }}</p>
-          <span class="stock" 
-                [ngClass]="{ 'in-stock': product.inStock, 'out-stock': !product.inStock }">
-            {{ product.inStock ? '✅ In Stock' : '❌ Out of Stock' }}
-          </span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>ngFor Special Variables</h3>
-      <div class="special-list">
-        <div *ngFor="let fruit of fruits; 
-                     let i = index;
-                     let first = first;
-                     let last = last;
-                     let even = even;
-                     let odd = odd"
-             class="list-item"
-             [ngClass]="{ 'even': even, 'odd': odd, 'first-item': first, 'last-item': last }">
-          <span class="index">{{ i + 1 }}</span>
-          <span class="content">{{ fruit }}</span>
-          <span class="badges">
-            <span *ngIf="first" class="badge">FIRST</span>
-            <span *ngIf="last" class="badge">LAST</span>
-            <span *ngIf="even" class="badge">EVEN</span>
-            <span *ngIf="odd" class="badge">ODD</span>
-          </span>
-        </div>
-      </div>
+    <div class="sync-demo">
+      <h4>🔄 All Values are Synchronized:</h4>
+      <p>Counter 1: {{ counterValue1 }} | Counter 2: {{ counterValue2 }} | Counter 3: {{ counterValue3 }}</p>
+      <p>Sum: <strong>{{ counterValue1 + counterValue2 + counterValue3 }}</strong></p>
     </div>
   </section>
 
   <!-- ============================================ -->
-  <!-- 3️⃣ *ngSwitch Section -->
+  <!-- 4️⃣ Interactive Rating Component -->
   <!-- ============================================ -->
-  <section class="section ngswitch-section">
-    <h2>3️⃣ *ngSwitch - Multiple Conditions</h2>
+  <section class="section">
+    <h2>4️⃣ Rating Component - Interactive Example</h2>
     
-    <div class="card">
-      <h3>User Role Dashboard</h3>
-      <div class="role-buttons">
-        <button (click)="setRole('admin')" [class.active]="userRole === 'admin'">Admin</button>
-        <button (click)="setRole('user')" [class.active]="userRole === 'user'">User</button>
-        <button (click)="setRole('guest')" [class.active]="userRole === 'guest'">Guest</button>
-        <button (click)="setRole('unknown')" [class.active]="userRole === 'unknown'">Unknown</button>
+    <div class="rating-examples">
+      <div class="rating-demo">
+        <h3>Product Rating</h3>
+        <app-rating 
+          [(rating)]="productRating"
+          [maxRating]="5"
+          (ratingChange)="handleRatingChange($event, 'Product')">
+        </app-rating>
+        <p>You rated: {{ productRating }}/5 stars</p>
       </div>
       
-      <div [ngSwitch]="userRole" class="role-display">
-        <div *ngSwitchCase="'admin'" class="role-admin">
-          <h4>👑 Admin Dashboard</h4>
-          <p>Full access granted. You can manage everything!</p>
-        </div>
-        
-        <div *ngSwitchCase="'user'" class="role-user">
-          <h4>👤 User Dashboard</h4>
-          <p>Standard access. Enjoy your personalized experience!</p>
-        </div>
-        
-        <div *ngSwitchCase="'guest'" class="role-guest">
-          <h4>👋 Guest View</h4>
-          <p>Limited access. Sign up for more features!</p>
-        </div>
-        
-        <div *ngSwitchDefault class="role-unknown">
-          <h4>❓ Unknown Role</h4>
-          <p>Please contact administrator for access.</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>User Status Indicator</h3>
-      <div class="status-buttons">
-        <button (click)="setStatus('online')" [class.active]="userStatus === 'online'">Online</button>
-        <button (click)="setStatus('away')" [class.active]="userStatus === 'away'">Away</button>
-        <button (click)="setStatus('offline')" [class.active]="userStatus === 'offline'">Offline</button>
+      <div class="rating-demo">
+        <h3>User Experience</h3>
+        <app-rating 
+          [(rating)]="userExperience"
+          [maxRating]="5"
+          (ratingChange)="handleRatingChange($event, 'Experience')">
+        </app-rating>
+        <p>Experience rating: {{ userExperience }}/5 stars</p>
       </div>
       
-      <div [ngSwitch]="userStatus" class="status-display">
-        <div *ngSwitchCase="'online'" class="status online">
-          <span class="indicator"></span>
-          <p>🟢 Online - Available now</p>
-        </div>
-        
-        <div *ngSwitchCase="'away'" class="status away">
-          <span class="indicator"></span>
-          <p>🟡 Away - Will respond soon</p>
-        </div>
-        
-        <div *ngSwitchCase="'offline'" class="status offline">
-          <span class="indicator"></span>
-          <p>⚫ Offline - Leave a message</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 4️⃣ ngClass Section -->
-  <!-- ============================================ -->
-  <section class="section ngclass-section">
-    <h2>4️⃣ ngClass - Dynamic Classes</h2>
-    
-    <div class="card">
-      <h3>Toggle Classes</h3>
-      <button (click)="toggleActive()" class="toggle-btn">Toggle Active</button>
-      <button (click)="toggleError()" class="toggle-btn">Toggle Error</button>
-      
-      <div [ngClass]="{ 'active': isActive, 'error': hasError, 'special': isSpecial }" 
-           class="demo-box">
-        <p>Active: {{ isActive }}</p>
-        <p>Error: {{ hasError }}</p>
-        <p>Special: {{ isSpecial }}</p>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>Score-Based Styling</h3>
-      <label>Score: {{ score }}</label>
-      <input type="range" [(ngModel)]="score" min="0" max="100" class="slider">
-      
-      <div [ngClass]="getScoreClass()" class="score-display">
-        <h4>Your Score: {{ score }}/100</h4>
-        <p *ngIf="score >= 80">🎉 Excellent!</p>
-        <p *ngIf="score >= 60 && score < 80">👍 Good job!</p>
-        <p *ngIf="score >= 40 && score < 60">😐 Average</p>
-        <p *ngIf="score < 40">😢 Need improvement</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 5️⃣ ngStyle Section -->
-  <!-- ============================================ -->
-  <section class="section ngstyle-section">
-    <h2>5️⃣ ngStyle - Dynamic Styles</h2>
-    
-    <div class="card">
-      <h3>Custom Text Styling</h3>
-      <label>Font Size: {{ fontSize }}px</label>
-      <input type="range" [(ngModel)]="fontSize" min="12" max="48" class="slider">
-      
-      <label>Text Color:</label>
-      <input type="color" [(ngModel)]="textColor">
-      
-      <div [ngStyle]="{ 
-        'color': textColor, 
-        'font-size.px': fontSize,
-        'font-weight': 'bold'
-      }" class="styled-text">
-        Customizable Text! 🎨
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>Temperature Display</h3>
-      <label>Temperature: {{ temperature }}°C</label>
-      <input type="range" [(ngModel)]="temperature" min="0" max="50" class="slider">
-      
-      <div [ngStyle]="getTemperatureStyle()" class="temperature-display">
-        {{ temperature }}°C
-        <span *ngIf="temperature > 30">🔥 Hot!</span>
-        <span *ngIf="temperature >= 15 && temperature <= 30">😊 Pleasant</span>
-        <span *ngIf="temperature < 15">🥶 Cold!</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 🎯 TODO LIST Practice Section -->
-  <!-- ============================================ -->
-  <section class="section todo-section">
-    <h2>🎯 Practice: Todo List App</h2>
-    
-    <div class="card todo-card">
-      <div class="todo-header">
-        <h3>My Tasks</h3>
-        <div class="todo-stats">
-          <span class="stat completed">✅ {{ completedCount }} Completed</span>
-          <span class="stat pending">⏳ {{ pendingCount }} Pending</span>
-        </div>
+      <div class="rating-demo">
+        <h3>Overall Satisfaction</h3>
+        <app-rating 
+          [(rating)]="overallSatisfaction"
+          [maxRating]="10">
+        </app-rating>
+        <p>Satisfaction: {{ overallSatisfaction }}/10</p>
       </div>
       
-      <div class="todo-filters">
-        <label>
-          <input type="checkbox" [(ngModel)]="showCompleted">
-          Show Completed
-        </label>
-        <label>
-          <input type="checkbox" [(ngModel)]="showPending">
-          Show Pending
-        </label>
-      </div>
-      
-      <div class="add-todo">
-        <input 
-          [(ngModel)]="newTodoText" 
-          (keyup.enter)="addTodo()"
-          placeholder="Add a new task..."
-          class="todo-input">
-        <button (click)="addTodo()" class="add-btn">➕ Add</button>
-      </div>
-      
-      <div class="todo-list">
-        <div *ngIf="filteredTodos.length === 0" class="empty-state">
-          <p>📝 No tasks to show</p>
-        </div>
-        
-        <div *ngFor="let todo of filteredTodos; trackBy: trackByTodoId"
-             class="todo-item"
-             [ngClass]="{ 'completed': todo.completed }">
-          <input 
-            type="checkbox" 
-            [checked]="todo.completed"
-            (change)="toggleTodo(todo)">
-          <span class="todo-text" (click)="toggleTodo(todo)">
-            {{ todo.text }}
-          </span>
-          <button (click)="deleteTodo(todo.id)" class="delete-btn">🗑️</button>
-        </div>
+      <div class="rating-demo">
+        <h3>Read-Only Rating</h3>
+        <app-rating 
+          [rating]="4"
+          [maxRating]="5"
+          [readonly]="true">
+        </app-rating>
+        <p>This rating is read-only</p>
       </div>
     </div>
   </section>
 
   <!-- Summary -->
   <div class="lesson-summary">
-    <h3>✅ Lesson 3 Complete!</h3>
+    <h3>✅ Lesson 4 Complete!</h3>
     <ul>
-      <li>✨ *ngIf - Conditional rendering</li>
-      <li>🔄 *ngFor - Looping through arrays</li>
-      <li>🔀 *ngSwitch - Multiple conditions</li>
-      <li>🎨 ngClass - Dynamic classes</li>
-      <li>💅 ngStyle - Dynamic styles</li>
+      <li>✨ @Input() - Parent → Child data flow</li>
+      <li>🔄 @Output() - Child → Parent events</li>
+      <li>🔗 Two-Way Binding with custom components</li>
+      <li>🎯 Interactive components (Counter, Rating)</li>
+      <li>📦 Real-world example (Product System)</li>
     </ul>
-    <p><strong>Next:</strong> Lesson 4 - Components & Communication! 🚀</p>
+    <p><strong>Next:</strong> Lesson 5 - Services & Dependency Injection! 🚀</p>
   </div>
 </div>
 

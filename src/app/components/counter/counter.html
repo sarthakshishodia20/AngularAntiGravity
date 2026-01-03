@@ -1,0 +1,27 @@
+<!-- Counter Template -->
+<div class="counter-widget">
+  <button 
+    (click)="decrement()" 
+    [disabled]="value <= min"
+    class="counter-btn decrement">
+    ➖
+  </button>
+  
+  <div class="counter-display">
+    <span class="value">{{ value }}</span>
+    <span class="range">{{ min }} - {{ max }}</span>
+  </div>
+  
+  <button 
+    (click)="increment()" 
+    [disabled]="value >= max"
+    class="counter-btn increment">
+    ➕
+  </button>
+  
+  <button 
+    (click)="reset()" 
+    class="counter-btn reset">
+    🔄
+  </button>
+</div>

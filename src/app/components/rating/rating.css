@@ -1,0 +1,34 @@
+/* Rating Styles */
+
+.rating-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star {
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  filter: grayscale(100%);
+}
+
+.star.filled {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+}
+
+.star:hover:not(.readonly) {
+  transform: scale(1.3);
+}
+
+.star.readonly {
+  cursor: default;
+}
+
+.rating-text {
+  margin-left: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #667eea;
+}
