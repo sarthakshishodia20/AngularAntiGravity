@@ -1,180 +1,356 @@
-<!-- 📚 Lesson 2: Data Binding - All Examples -->
+<!-- 📚 Lesson 3: Directives - All Examples -->
 
 <div class="container">
-  <h1 class="main-title">📚 Lesson 2: Data Binding</h1>
+  <h1 class="main-title">📚 Lesson 3: Directives</h1>
   
   <!-- ============================================ -->
-  <!-- 1️⃣ INTERPOLATION Section -->
+  <!-- 1️⃣ *ngIf Section -->
   <!-- ============================================ -->
-  <section class="section interpolation-section">
-    <h2>1️⃣ Interpolation {{ "{" }}{{ "}" }}</h2>
-    <div class="card">
-      <h3>Simple Variables:</h3>
-      <p><strong>Name:</strong> {{ name }}</p>
-      <p><strong>Age:</strong> {{ age }}</p>
-      <p><strong>Location:</strong> {{ city }}, {{ country }}</p>
-      
-      <h3>Method Call:</h3>
-      <p>{{ getFullInfo() }}</p>
-      
-      <h3>Expression & Calculation:</h3>
-      <p><strong>Price:</strong> ₹{{ price }}</p>
-      <p><strong>Quantity:</strong> {{ quantity }}</p>
-      <p><strong>Total:</strong> ₹{{ price * quantity }}</p>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 2️⃣ PROPERTY BINDING Section -->
-  <!-- ============================================ -->
-  <section class="section property-binding-section">
-    <h2>2️⃣ Property Binding [property]</h2>
+  <section class="section ngif-section">
+    <h2>1️⃣ *ngIf - Conditional Rendering</h2>
     
     <div class="card">
-      <h3>Image Source Binding:</h3>
-      <img [src]="imageUrl" [alt]="imageAlt" width="150">
-      
-      <h3>Disabled Property:</h3>
-      <button [disabled]="isButtonDisabled">
-        {{ isButtonDisabled ? 'Disabled Button' : 'Enabled Button' }}
-      </button>
-      <button (click)="isButtonDisabled = !isButtonDisabled" class="toggle-btn">
-        Toggle Disabled
+      <h3>Basic *ngIf</h3>
+      <button (click)="toggleLogin()" class="toggle-btn">
+        {{ isLoggedIn ? 'Logout' : 'Login' }}
       </button>
       
-      <h3>Class Binding:</h3>
-      <div [class.active]="isActive" class="demo-box">
-        Active Status: {{ isActive }}
+      <div *ngIf="isLoggedIn" class="status-box success">
+        ✅ Welcome back! You are logged in.
       </div>
-      <button (click)="isActive = !isActive" class="toggle-btn">
-        Toggle Active Class
-      </button>
       
-      <h3>Style Binding:</h3>
-      <p [style.color]="textColor" [style.font-size]="fontSize" [style.font-weight]="'bold'">
-        This text has dynamic styles!
-      </p>
+      <div *ngIf="!isLoggedIn" class="status-box warning">
+        ⚠️ Please login to continue.
+      </div>
     </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 3️⃣ EVENT BINDING Section -->
-  <!-- ============================================ -->
-  <section class="section event-binding-section">
-    <h2>3️⃣ Event Binding (event)</h2>
     
     <div class="card">
-      <h3>Click Event:</h3>
-      <p class="message">{{ clickMessage }}</p>
-      <button (click)="onButtonClick()" class="action-btn">
-        Click Me! 🖱️
-      </button>
+      <h3>*ngIf with else</h3>
+      <button (click)="toggleData()" class="toggle-btn">Toggle Data</button>
       
-      <h3>Input Event:</h3>
-      <input 
-        type="text" 
-        (input)="onInputChange($event)" 
-        placeholder="Type something..."
-        class="input-field">
-      <p>You typed: <strong>{{ userInput }}</strong></p>
-      
-      <h3>Mouse Events:</h3>
-      <p class="message">{{ mouseStatus }}</p>
-      <div 
-        (mouseenter)="onMouseEnter()" 
-        (mouseleave)="onMouseLeave()"
-        class="hover-box">
-        Hover over me!
+      <div *ngIf="hasData; else noData" class="status-box success">
+        📊 Data is available!
       </div>
       
-      <h3>Event with Parameters:</h3>
-      <div class="color-buttons">
-        <button (click)="selectColor('Red')" class="color-btn red">Red</button>
-        <button (click)="selectColor('Green')" class="color-btn green">Green</button>
-        <button (click)="selectColor('Blue')" class="color-btn blue">Blue</button>
-        <button (click)="selectColor('Orange')" class="color-btn orange">Orange</button>
-      </div>
-      <p>Selected Color: <strong [style.color]="textColor">{{ selectedColor }}</strong></p>
+      <ng-template #noData>
+        <div class="status-box error">
+          ❌ No data found
+        </div>
+      </ng-template>
     </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 4️⃣ TWO-WAY BINDING Section -->
-  <!-- ============================================ -->
-  <section class="section two-way-binding-section">
-    <h2>4️⃣ Two-Way Binding [(ngModel)]</h2>
     
     <div class="card">
-      <h3>Simple Example:</h3>
-      <input 
-        [(ngModel)]="username" 
-        placeholder="Enter your name"
-        class="input-field">
-      <p>Hello, <strong>{{ username || 'Guest' }}</strong>! 👋</p>
+      <h3>*ngIf with then/else</h3>
+      <button (click)="toggleLoading()" class="toggle-btn">Toggle Loading</button>
       
-      <h3>Contact Form:</h3>
-      <div class="form-group">
-        <label>Full Name:</label>
-        <input [(ngModel)]="user.fullName" placeholder="John Doe" class="input-field">
-      </div>
+      <div *ngIf="isLoading; then loading; else content"></div>
       
-      <div class="form-group">
-        <label>Email:</label>
-        <input [(ngModel)]="user.emailAddress" type="email" placeholder="john@example.com" class="input-field">
-      </div>
+      <ng-template #loading>
+        <div class="status-box info">
+          ⏳ Loading...
+        </div>
+      </ng-template>
       
-      <div class="form-group">
-        <label>Age:</label>
-        <input [(ngModel)]="user.age" type="number" placeholder="25" class="input-field">
-      </div>
-      
-      <div class="form-group">
-        <label>City:</label>
-        <input [(ngModel)]="user.city" placeholder="New York" class="input-field">
-      </div>
-      
-      <div class="form-actions">
-        <button (click)="submitForm()" class="submit-btn">Submit 📝</button>
-        <button (click)="clearForm()" class="clear-btn">Clear ❌</button>
-      </div>
-      
-      <div class="preview-box">
-        <h4>Live Preview:</h4>
-        <p><strong>Name:</strong> {{ user.fullName || '-' }}</p>
-        <p><strong>Email:</strong> {{ user.emailAddress || '-' }}</p>
-        <p><strong>Age:</strong> {{ user.age || '-' }}</p>
-        <p><strong>City:</strong> {{ user.city || '-' }}</p>
-      </div>
+      <ng-template #content>
+        <div class="status-box success">
+          ✨ Content loaded successfully!
+        </div>
+      </ng-template>
     </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 🎯 COUNTER Practice Section -->
-  <!-- ============================================ -->
-  <section class="section counter-section">
-    <h2>🎯 Practice: Counter Example</h2>
     
-    <div class="card counter-card">
-      <h3>Interactive Counter</h3>
-      <div class="counter-display">{{ counter }}</div>
+    <div class="card">
+      <h3>Multiple Conditions</h3>
+      <p>Age: {{ age }}, Student: {{ isStudent ? 'Yes' : 'No' }}</p>
       
-      <div class="counter-controls">
-        <button (click)="decrement()" class="counter-btn decrement">➖ Decrease</button>
-        <button (click)="reset()" class="counter-btn reset">🔄 Reset</button>
-        <button (click)="increment()" class="counter-btn increment">➕ Increase</button>
+      <div *ngIf="age >= 18 && isStudent" class="status-box success">
+        🎓 Student discount available!
       </div>
       
-      <div class="form-group">
-        <label>Set Value Manually:</label>
-        <input [(ngModel)]="counter" type="number" class="input-field">
+      <div *ngIf="age < 18" class="status-box info">
+        👶 You are a minor
       </div>
     </div>
   </section>
 
-  <!-- Next Lesson Info -->
-  <div class="next-lesson">
-    <p><strong>✅ Lesson 2 Complete!</strong></p>
-    <p>Next: Lesson 3 - Directives (*ngIf, *ngFor) 🚀</p>
+  <!-- ============================================ -->
+  <!-- 2️⃣ *ngFor Section -->
+  <!-- ============================================ -->
+  <section class="section ngfor-section">
+    <h2>2️⃣ *ngFor - Loop Elements</h2>
+    
+    <div class="card">
+      <h3>Simple Array</h3>
+      <ul class="fruit-list">
+        <li *ngFor="let fruit of fruits">{{ fruit }}</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>With Index</h3>
+      <ul class="indexed-list">
+        <li *ngFor="let color of colors; let i = index">
+          #{{ i + 1 }} - {{ color }}
+        </li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>Array of Objects - Users</h3>
+      <div class="user-grid">
+        <div *ngFor="let user of users; trackBy: trackByUserId" 
+             class="user-card"
+             [ngClass]="{ 'inactive': !user.active }">
+          <h4>{{ user.name }}</h4>
+          <p class="role">{{ user.role }}</p>
+          <span class="status" [class.active]="user.active">
+            {{ user.active ? '🟢 Active' : '🔴 Inactive' }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Products with Stock Status</h3>
+      <div class="product-grid">
+        <div *ngFor="let product of products; trackBy: trackByProductId" 
+             class="product-card">
+          <h4>{{ product.name }}</h4>
+          <p class="price">₹{{ product.price.toLocaleString() }}</p>
+          <span class="stock" 
+                [ngClass]="{ 'in-stock': product.inStock, 'out-stock': !product.inStock }">
+            {{ product.inStock ? '✅ In Stock' : '❌ Out of Stock' }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>ngFor Special Variables</h3>
+      <div class="special-list">
+        <div *ngFor="let fruit of fruits; 
+                     let i = index;
+                     let first = first;
+                     let last = last;
+                     let even = even;
+                     let odd = odd"
+             class="list-item"
+             [ngClass]="{ 'even': even, 'odd': odd, 'first-item': first, 'last-item': last }">
+          <span class="index">{{ i + 1 }}</span>
+          <span class="content">{{ fruit }}</span>
+          <span class="badges">
+            <span *ngIf="first" class="badge">FIRST</span>
+            <span *ngIf="last" class="badge">LAST</span>
+            <span *ngIf="even" class="badge">EVEN</span>
+            <span *ngIf="odd" class="badge">ODD</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 3️⃣ *ngSwitch Section -->
+  <!-- ============================================ -->
+  <section class="section ngswitch-section">
+    <h2>3️⃣ *ngSwitch - Multiple Conditions</h2>
+    
+    <div class="card">
+      <h3>User Role Dashboard</h3>
+      <div class="role-buttons">
+        <button (click)="setRole('admin')" [class.active]="userRole === 'admin'">Admin</button>
+        <button (click)="setRole('user')" [class.active]="userRole === 'user'">User</button>
+        <button (click)="setRole('guest')" [class.active]="userRole === 'guest'">Guest</button>
+        <button (click)="setRole('unknown')" [class.active]="userRole === 'unknown'">Unknown</button>
+      </div>
+      
+      <div [ngSwitch]="userRole" class="role-display">
+        <div *ngSwitchCase="'admin'" class="role-admin">
+          <h4>👑 Admin Dashboard</h4>
+          <p>Full access granted. You can manage everything!</p>
+        </div>
+        
+        <div *ngSwitchCase="'user'" class="role-user">
+          <h4>👤 User Dashboard</h4>
+          <p>Standard access. Enjoy your personalized experience!</p>
+        </div>
+        
+        <div *ngSwitchCase="'guest'" class="role-guest">
+          <h4>👋 Guest View</h4>
+          <p>Limited access. Sign up for more features!</p>
+        </div>
+        
+        <div *ngSwitchDefault class="role-unknown">
+          <h4>❓ Unknown Role</h4>
+          <p>Please contact administrator for access.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>User Status Indicator</h3>
+      <div class="status-buttons">
+        <button (click)="setStatus('online')" [class.active]="userStatus === 'online'">Online</button>
+        <button (click)="setStatus('away')" [class.active]="userStatus === 'away'">Away</button>
+        <button (click)="setStatus('offline')" [class.active]="userStatus === 'offline'">Offline</button>
+      </div>
+      
+      <div [ngSwitch]="userStatus" class="status-display">
+        <div *ngSwitchCase="'online'" class="status online">
+          <span class="indicator"></span>
+          <p>🟢 Online - Available now</p>
+        </div>
+        
+        <div *ngSwitchCase="'away'" class="status away">
+          <span class="indicator"></span>
+          <p>🟡 Away - Will respond soon</p>
+        </div>
+        
+        <div *ngSwitchCase="'offline'" class="status offline">
+          <span class="indicator"></span>
+          <p>⚫ Offline - Leave a message</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4️⃣ ngClass Section -->
+  <!-- ============================================ -->
+  <section class="section ngclass-section">
+    <h2>4️⃣ ngClass - Dynamic Classes</h2>
+    
+    <div class="card">
+      <h3>Toggle Classes</h3>
+      <button (click)="toggleActive()" class="toggle-btn">Toggle Active</button>
+      <button (click)="toggleError()" class="toggle-btn">Toggle Error</button>
+      
+      <div [ngClass]="{ 'active': isActive, 'error': hasError, 'special': isSpecial }" 
+           class="demo-box">
+        <p>Active: {{ isActive }}</p>
+        <p>Error: {{ hasError }}</p>
+        <p>Special: {{ isSpecial }}</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Score-Based Styling</h3>
+      <label>Score: {{ score }}</label>
+      <input type="range" [(ngModel)]="score" min="0" max="100" class="slider">
+      
+      <div [ngClass]="getScoreClass()" class="score-display">
+        <h4>Your Score: {{ score }}/100</h4>
+        <p *ngIf="score >= 80">🎉 Excellent!</p>
+        <p *ngIf="score >= 60 && score < 80">👍 Good job!</p>
+        <p *ngIf="score >= 40 && score < 60">😐 Average</p>
+        <p *ngIf="score < 40">😢 Need improvement</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 5️⃣ ngStyle Section -->
+  <!-- ============================================ -->
+  <section class="section ngstyle-section">
+    <h2>5️⃣ ngStyle - Dynamic Styles</h2>
+    
+    <div class="card">
+      <h3>Custom Text Styling</h3>
+      <label>Font Size: {{ fontSize }}px</label>
+      <input type="range" [(ngModel)]="fontSize" min="12" max="48" class="slider">
+      
+      <label>Text Color:</label>
+      <input type="color" [(ngModel)]="textColor">
+      
+      <div [ngStyle]="{ 
+        'color': textColor, 
+        'font-size.px': fontSize,
+        'font-weight': 'bold'
+      }" class="styled-text">
+        Customizable Text! 🎨
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Temperature Display</h3>
+      <label>Temperature: {{ temperature }}°C</label>
+      <input type="range" [(ngModel)]="temperature" min="0" max="50" class="slider">
+      
+      <div [ngStyle]="getTemperatureStyle()" class="temperature-display">
+        {{ temperature }}°C
+        <span *ngIf="temperature > 30">🔥 Hot!</span>
+        <span *ngIf="temperature >= 15 && temperature <= 30">😊 Pleasant</span>
+        <span *ngIf="temperature < 15">🥶 Cold!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 🎯 TODO LIST Practice Section -->
+  <!-- ============================================ -->
+  <section class="section todo-section">
+    <h2>🎯 Practice: Todo List App</h2>
+    
+    <div class="card todo-card">
+      <div class="todo-header">
+        <h3>My Tasks</h3>
+        <div class="todo-stats">
+          <span class="stat completed">✅ {{ completedCount }} Completed</span>
+          <span class="stat pending">⏳ {{ pendingCount }} Pending</span>
+        </div>
+      </div>
+      
+      <div class="todo-filters">
+        <label>
+          <input type="checkbox" [(ngModel)]="showCompleted">
+          Show Completed
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="showPending">
+          Show Pending
+        </label>
+      </div>
+      
+      <div class="add-todo">
+        <input 
+          [(ngModel)]="newTodoText" 
+          (keyup.enter)="addTodo()"
+          placeholder="Add a new task..."
+          class="todo-input">
+        <button (click)="addTodo()" class="add-btn">➕ Add</button>
+      </div>
+      
+      <div class="todo-list">
+        <div *ngIf="filteredTodos.length === 0" class="empty-state">
+          <p>📝 No tasks to show</p>
+        </div>
+        
+        <div *ngFor="let todo of filteredTodos; trackBy: trackByTodoId"
+             class="todo-item"
+             [ngClass]="{ 'completed': todo.completed }">
+          <input 
+            type="checkbox" 
+            [checked]="todo.completed"
+            (change)="toggleTodo(todo)">
+          <span class="todo-text" (click)="toggleTodo(todo)">
+            {{ todo.text }}
+          </span>
+          <button (click)="deleteTodo(todo.id)" class="delete-btn">🗑️</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <div class="lesson-summary">
+    <h3>✅ Lesson 3 Complete!</h3>
+    <ul>
+      <li>✨ *ngIf - Conditional rendering</li>
+      <li>🔄 *ngFor - Looping through arrays</li>
+      <li>🔀 *ngSwitch - Multiple conditions</li>
+      <li>🎨 ngClass - Dynamic classes</li>
+      <li>💅 ngStyle - Dynamic styles</li>
+    </ul>
+    <p><strong>Next:</strong> Lesson 4 - Components & Communication! 🚀</p>
   </div>
 </div>
 
