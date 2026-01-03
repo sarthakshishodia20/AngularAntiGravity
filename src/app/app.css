@@ -1,14 +1,14 @@
-/* 🎨 Lesson 2: Data Binding Styles */
+/* 🎨 Lesson 3: Directives Styles */
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 30px auto;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .main-title {
-  color: #dd0031;
+  color: #667eea;
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 40px;
@@ -17,45 +17,358 @@
 
 /* Section Styles */
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .section h2 {
   color: #333;
   font-size: 1.8rem;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid #dd0031;
+  margin-bottom: 25px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #667eea;
 }
 
-/* Card Container */
+/* Card Styles */
 .card {
   background: #fff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .card h3 {
   color: #667eea;
   font-size: 1.3rem;
-  margin-top: 20px;
   margin-bottom: 15px;
 }
 
-.card h3:first-child {
-  margin-top: 0;
-}
-
-.card p {
+/* Status Boxes */
+.status-box {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin: 10px 0;
   font-size: 1.1rem;
-  line-height: 1.6;
-  color: #555;
-  margin: 8px 0;
+  font-weight: 500;
 }
 
-/* Property Binding - Demo Box */
+.status-box.success {
+  background: #d4edda;
+  border-left: 4px solid #28a745;
+  color: #155724;
+}
+
+.status-box.warning {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  color: #856404;
+}
+
+.status-box.error {
+  background: #f8d7da;
+  border-left: 4px solid #dc3545;
+  color: #721c24;
+}
+
+.status-box.info {
+  background: #d1ecf1;
+  border-left: 4px solid #17a2b8;
+  color: #0c5460;
+}
+
+/* Buttons */
+.toggle-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Lists */
+.fruit-list {
+  list-style: none;
+  padding: 0;
+}
+
+.fruit-list li {
+  padding: 12px;
+  background: #f8f9fa;
+  margin: 8px 0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.indexed-list {
+  list-style: none;
+  padding: 0;
+}
+
+.indexed-list li {
+  padding: 10px 15px;
+  background: linear-gradient(90deg, #667eea20, transparent);
+  margin: 5px 0;
+  border-left: 3px solid #667eea;
+  border-radius: 4px;
+}
+
+/* User Grid */
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.user-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.user-card.inactive {
+  background: #6c757d;
+  opacity: 0.7;
+}
+
+.user-card h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.user-card .role {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.user-card .status {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  font-size: 0.85rem;
+}
+
+.user-card .status.active {
+  background: rgba(40, 167, 69, 0.3);
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.product-card {
+  background: #fff;
+  border: 2px solid #e9ecef;
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+.product-card h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.product-card .price {
+  color: #28a745;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.product-card .stock {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.product-card .stock.in-stock {
+  background: #d4edda;
+  color: #155724;
+}
+
+.product-card .stock.out-stock {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Special List */
+.special-list {
+  margin-top: 15px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.list-item.even {
+  background: #e7f3ff;
+}
+
+.list-item.odd {
+  background: #fff3e7;
+}
+
+.list-item.first-item {
+  border: 2px solid #28a745;
+}
+
+.list-item.last-item {
+  border: 2px solid #dc3545;
+}
+
+.list-item .index {
+  background: #667eea;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right: 15px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.list-item .content {
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.list-item .badges {
+  display: flex;
+  gap: 5px;
+}
+
+.list-item .badge {
+  padding: 3px 8px;
+  background: #667eea;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Role Section */
+.role-buttons,
+.status-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.role-buttons button,
+.status-buttons button {
+  padding: 10px 20px;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.role-buttons button:hover,
+.status-buttons button:hover {
+  background: #667eea;
+  color: white;
+}
+
+.role-buttons button.active,
+.status-buttons button.active {
+  background: #667eea;
+  color: white;
+}
+
+.role-display,
+.status-display {
+  padding: 25px;
+  border-radius: 12px;
+  min-height: 120px;
+}
+
+.role-admin { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); }
+.role-user { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.role-guest { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+.role-unknown { background: linear-gradient(135deg, #6c757d 0%, #495057 100%); }
+
+.role-display h4 {
+  color: white;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.role-display p {
+  color: white;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* Status Display */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.status .indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status.online { background: #d4edda; color: #155724; }
+.status.online .indicator { background: #28a745; }
+
+.status.away { background: #fff3cd; color: #856404; }
+.status.away .indicator { background: #ffc107; }
+
+.status.offline { background: #e2e3e5; color: #383d41; }
+.status.offline .indicator { background: #6c757d; }
+
+/* Demo Box for ngClass */
 .demo-box {
   padding: 20px;
   border: 2px solid #ddd;
@@ -68,324 +381,280 @@
   background: #28a745;
   color: white;
   border-color: #28a745;
-  font-weight: bold;
 }
 
-/* Buttons */
-button {
-  padding: 12px 24px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  margin: 5px;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.toggle-btn {
-  background: #6c757d;
-  color: white;
-}
-
-.toggle-btn:hover {
-  background: #5a6268;
-}
-
-.action-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-size: 1.1rem;
-}
-
-.action-btn:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-/* Color Buttons */
-.color-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 15px 0;
-}
-
-.color-btn {
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-}
-
-.color-btn.red { background: #dc3545; }
-.color-btn.red:hover { background: #c82333; }
-
-.color-btn.green { background: #28a745; }
-.color-btn.green:hover { background: #218838; }
-
-.color-btn.blue { background: #007bff; }
-.color-btn.blue:hover { background: #0056b3; }
-
-.color-btn.orange { background: #fd7e14; }
-.color-btn.orange:hover { background: #e8590c; }
-
-/* Input Fields */
-.input-field {
-  width: 100%;
-  max-width: 400px;
-  padding: 12px 16px;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  margin: 10px 0;
-  transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-/* Message Display */
-.message {
-  background: #fff3cd;
-  border-left: 4px solid #ffc107;
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  color: #856404;
-  margin: 15px 0;
-}
-
-/* Hover Box */
-.hover-box {
-  padding: 40px;
-  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #333;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 15px 0;
-}
-
-.hover-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(132, 250, 176, 0.4);
-}
-
-/* Form Styles */
-.form-group {
-  margin: 15px 0;
-}
-
-.form-group label {
-  display: block;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-  font-size: 1rem;
-}
-
-.form-actions {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.submit-btn {
-  background: #28a745;
-  color: white;
-  flex: 1;
-}
-
-.submit-btn:hover {
-  background: #218838;
-}
-
-.clear-btn {
+.demo-box.error {
   background: #dc3545;
   color: white;
-  flex: 1;
+  border-color: #dc3545;
 }
 
-.clear-btn:hover {
-  background: #c82333;
+.demo-box.special {
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
-/* Preview Box */
-.preview-box {
-  background: #f8f9fa;
-  border: 2px dashed #6c757d;
+/* Score Display */
+.score-display {
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.score-excellent {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.score-good {
+  background: linear-gradient(135deg, #17a2b8, #20c997);
+  color: white;
+}
+
+.score-average {
+  background: linear-gradient(135deg, #ffc107, #fd7e14);
+  color: white;
+}
+
+.score-poor {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.score-display h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+}
+
+.score-display p {
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+
+/* Slider */
+.slider {
+  width: 100%;
+  max-width: 400px;
+  height: 8px;
+  border-radius: 5px;
+  outline: none;
+  margin: 10px 0 20px 0;
+}
+
+/* Styled Text */
+.styled-text {
   padding: 20px;
+  background: #f8f9fa;
   border-radius: 8px;
-  margin-top: 20px;
+  text-align: center;
+  margin: 15px 0;
 }
 
-.preview-box h4 {
-  color: #667eea;
-  margin-top: 0;
-  margin-bottom: 15px;
+/* Temperature Display */
+.temperature-display {
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 15px 0;
 }
 
-.preview-box p {
-  margin: 8px 0;
-  color: #333;
-}
-
-/* Counter Section */
-.counter-section {
+/* Todo Section */
+.todo-section {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 30px;
   border-radius: 15px;
-  color: white;
 }
 
-.counter-section h2 {
+.todo-section h2 {
   color: white;
   border-bottom-color: white;
 }
 
-.counter-card {
-  background: rgba(255, 255, 255, 0.95);
-  text-align: center;
+.todo-card {
+  background: white;
 }
 
-.counter-display {
-  font-size: 5rem;
-  font-weight: bold;
-  color: #667eea;
-  margin: 30px 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.counter-controls {
+.todo-header {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
-.counter-btn {
-  font-size: 1.1rem;
-  padding: 15px 30px;
-  min-width: 150px;
+.todo-stats {
+  display: flex;
+  gap: 15px;
 }
 
-.counter-btn.increment {
+.stat {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.stat.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.stat.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.todo-filters {
+  margin-bottom: 15px;
+}
+
+.todo-filters label {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.add-todo {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.add-btn {
   background: #28a745;
   color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.counter-btn.increment:hover {
+.add-btn:hover {
   background: #218838;
 }
 
-.counter-btn.decrement {
-  background: #dc3545;
-  color: white;
+.todo-list {
+  margin-top: 15px;
 }
 
-.counter-btn.decrement:hover {
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+  font-size: 1.2rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  background: #e9ecef;
+}
+
+.todo-item.completed {
+  opacity: 0.6;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.delete-btn:hover {
   background: #c82333;
 }
 
-.counter-btn.reset {
-  background: #ffc107;
-  color: #333;
-}
-
-.counter-btn.reset:hover {
-  background: #e0a800;
-}
-
-/* Next Lesson Box */
-.next-lesson {
+/* Lesson Summary */
+.lesson-summary {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   color: white;
-  padding: 25px;
-  border-radius: 12px;
+  padding: 30px;
+  border-radius: 15px;
   text-align: center;
   margin-top: 40px;
-  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
 }
 
-.next-lesson p {
-  margin: 10px 0;
+.lesson-summary h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.lesson-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.lesson-summary li {
   font-size: 1.2rem;
-  color: white;
+  margin: 10px 0;
 }
 
-.next-lesson strong {
-  font-size: 1.4rem;
+.lesson-summary p {
+  font-size: 1.3rem;
+  margin-top: 20px;
 }
 
 /* Section Colors */
-.interpolation-section .card {
-  border-left: 5px solid #17a2b8;
-}
+.ngif-section { border-left: 5px solid #28a745; }
+.ngfor-section { border-left: 5px solid #17a2b8; }
+.ngswitch-section { border-left: 5px solid #ffc107; }
+.ngclass-section { border-left: 5px solid #dc3545; }
+.ngstyle-section { border-left: 5px solid #667eea; }
 
-.property-binding-section .card {
-  border-left: 5px solid #28a745;
-}
-
-.event-binding-section .card {
-  border-left: 5px solid #ffc107;
-}
-
-.two-way-binding-section .card {
-  border-left: 5px solid #dc3545;
-}
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
-  
-  .main-title {
-    font-size: 2rem;
-  }
-  
-  .section h2 {
-    font-size: 1.5rem;
-  }
-  
-  .counter-display {
-    font-size: 3.5rem;
-  }
-  
-  .counter-controls {
-    flex-direction: column;
-  }
-  
-  .counter-btn {
-    min-width: auto;
-    width: 100%;
-  }
-  
-  .color-buttons {
-    flex-direction: column;
-  }
-  
-  .color-btn {
-    width: 100%;
-  }
+  .container { padding: 15px; }
+  .main-title { font-size: 2rem; }
+  .user-grid, .product-grid { grid-template-columns: 1fr; }
+  .role-buttons, .status-buttons { flex-direction: column; }
+  .role-buttons button, .status-buttons button { width: 100%; }
+  .todo-header { flex-direction: column; align-items: flex-start; }
 }
